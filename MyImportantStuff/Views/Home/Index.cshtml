@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MyImportantStuff.Models.TodoItem>
+
+@{
+    ViewData["Title"] = "My Important Tasks";
+}
+
+<asp:Input id="textbox1" runat="server" autocomplete="off"></asp:Input>
+
+<div class="text-center">
+    <h1 class="display-4">My Important Tasks</h1>
+    
+    <section>
+        <form class="my-5" asp-action="AddTodo", method="post" runat="server" autocomplete="off">
+            <div class="d-flex justify-content-center">
+                <div class="col-6 mx-2">
+                    <input id="textbox1" class="form-control" type="text" name="TodoName"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+
+        <div class="my-5">
+            <div class="d-flex justify-content-center">
+                <ul class="list-group">
+                @foreach (TodoItem todoItem in Model)
+                {
+                    <li class="list-group-item border-0 d-flex align-items-center ps-0 ">
+                        <input class="todo-checkbox form-check-input me-3" type="checkbox" name="isCompleted" @(todoItem.IsCompleted ? "checked" : "") data-todo-id="@todoItem.Id" onchange="UpdateTodoStatus(this)"/>
+                        @todoItem.TodoName
+                    </li>
+                }
+                </ul>
+            </div>
+        </div>
+
+        @if (Model.Any())
+        {
+            <form class="d-flex justify-content-center my-2" asp-action="DeleteCompleted">
+                <button type="submit" class="btn btn-danger">Delete Completed</button>
+            </form>
+            <form class="d-flex justify-content-center" asp-action="DeleteAll">
+                <button type="submit" class="btn btn-danger">Delete All</button>
+            </form>
+        }
+    </section>
+</div>

@@ -24,6 +24,7 @@ namespace ToDoConsoleApp.Services
 
         public void DeleteAll()
         {
+            _dbService.Truncate();
             Console.WriteLine("Successfully completed operation!");
         }
 

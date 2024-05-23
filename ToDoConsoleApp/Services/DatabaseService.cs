@@ -36,7 +36,7 @@ namespace ToDoConsoleApp.Services
 
             using (connection)
             {
-                SqlCommand command = new SqlCommand("SELECT Id, TaskName FROM TodoItems;", connection);
+                SqlCommand command = new SqlCommand("SELECT Id, TodoName FROM TodoItems;", connection);
                 SqlDataReader reader = command.ExecuteReader();
 
                 using (reader)
@@ -44,10 +44,10 @@ namespace ToDoConsoleApp.Services
                     while (reader.Read())
                     {
                         int id = (int)reader["Id"];
-                        string taskName = (string)reader["TaskName"];
+                        string TodoName = (string)reader["TodoName"];
 
                         todos.Add(new TodoItem() 
-                            { Id = id, TaskName = taskName }
+                            { Id = id, TodoName = TodoName }
                         );
                     }
                 }
@@ -68,16 +68,16 @@ namespace ToDoConsoleApp.Services
             }
         }
 
-        public int Update(int id, string taskName)
+        public int Update(int id, string TodoName)
         {
             SqlConnection connection = new SqlConnection(_conStr);
             connection.Open();
 
             using (connection)
             {
-                SqlCommand command = new SqlCommand($"UPDATE TodoItems SET TaskName = @taskName WHERE Id = @id", connection);
+                SqlCommand command = new SqlCommand($"UPDATE TodoItems SET TodoName = @TodoName WHERE Id = @id", connection);
                 command.Parameters.AddWithValue("@id", id);
-                command.Parameters.AddWithValue("@taskName", taskName);
+                command.Parameters.AddWithValue("@TodoName", TodoName);
 
                 return command.ExecuteNonQuery();
             }
@@ -90,7 +90,7 @@ namespace ToDoConsoleApp.Services
 
             using (connection)
             {
-                SqlCommand command = new SqlCommand($"INSERT INTO TodoItems(TaskName) VALUES('{task}')", connection);
+                SqlCommand command = new SqlCommand($"INSERT INTO TodoItems(TodoName) VALUES('{task}')", connection);
                 return command.ExecuteNonQuery();
             }
         }

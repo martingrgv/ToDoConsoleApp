@@ -109,7 +109,7 @@ namespace ToDoConsoleApp.UI
             Console.WriteLine();
 
             Console.WriteLine("Are you sure you want to rename this task? y/n");
-            Console.WriteLine($"--{item.TaskName}");
+            Console.WriteLine($"--{item.TodoName}");
 
             char choice = char.Parse(Console.ReadLine().ToLower());
 
@@ -140,7 +140,7 @@ namespace ToDoConsoleApp.UI
             TodoItem item = _controller.GetItemByIndex(index);
 
             Console.WriteLine("Are you sure you want to remove this task? y/n");
-            Console.WriteLine($"--{item.TaskName}");
+            Console.WriteLine($"--{item.TodoName}");
 
             char choice = char.Parse(Console.ReadLine().ToLower());
 

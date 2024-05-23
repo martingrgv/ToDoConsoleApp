@@ -1,4 +1,6 @@
-﻿namespace ToDoConsoleApp.Services
+﻿using ToDoConsoleApp.Interfaces.Services;
+
+namespace ToDoConsoleApp.Services
 {
     internal class Greeter
     {

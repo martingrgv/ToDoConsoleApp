@@ -10,7 +10,7 @@ namespace ToDoConsoleApp.Interfaces.Services
         TodoItem GetItemByIndex(int id);
         void WriteItems(string[] tasks);
         void WriteItem(string task);
-        void UpdateItem();
+        void UpdateItem(int id, string newTaskName);
         void DeleteItemById(int id);
         void DeleteAll();
     }

@@ -70,9 +70,15 @@ namespace ToDoConsoleApp.Services
             return sb.ToString().TrimEnd();
         }
 
-        public void UpdateItem()
+        public void UpdateItem(int id, string newTaskName)
         {
-            throw new NotImplementedException();
+            if (_dbService.Update(id, newTaskName) > 0)
+            {
+                Console.WriteLine("Successfully completed operation!");
+                return;
+            }
+
+            throw new InvalidOperationException("Could not complete operation!");
         }
 
         public void WriteItem(string task)

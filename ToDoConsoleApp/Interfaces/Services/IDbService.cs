@@ -6,7 +6,7 @@ namespace ToDoConsoleApp.Interfaces.Services
     {
         List<TodoItem> Read();
         int Write(string task);
-        void Update(int id);
+        int Update(int id, string taskName);
         int DeleteById(int id);
         void Truncate();
     }

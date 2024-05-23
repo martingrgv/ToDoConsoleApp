@@ -39,6 +39,7 @@ namespace ToDoConsoleApp.UI
                             WriteItem();
                             break;
                         case 3:
+                            UpdateItem();
                             break;
                         case 4:
                             DeleteItem();
@@ -76,26 +77,64 @@ namespace ToDoConsoleApp.UI
                 return;
             }
 
+            Console.WriteLine("Tasks");
+            Console.WriteLine("-----");
+
             Console.WriteLine(_controller.GetItemsStr());
         }
 
         private void WriteItem()
         {
+            Console.WriteLine("Create Task");
+            Console.WriteLine("-----------");
+
             Console.WriteLine("Enter task:");
             string task = Console.ReadLine();
 
             _controller.WriteItem(task);
         }
 
+        private void UpdateItem()
+        {
+            Console.WriteLine("Rename Task");
+            Console.WriteLine("-----------");
+
+            Console.Write("Enter task index: ");
+            int index = int.Parse(Console.ReadLine()) - 1;
+
+            TodoItem item = _controller.GetItemByIndex(index);
+            Console.WriteLine("Enter new name:");
+            string newTaskName = Console.ReadLine();
+
+            Console.WriteLine();
+
+            Console.WriteLine("Are you sure you want to rename this task? y/n");
+            Console.WriteLine($"--{item.TaskName}");
+
+            char choice = char.Parse(Console.ReadLine().ToLower());
+
+            if (choice == 'y')
+            {
+                _controller.UpdateItem(item.Id, newTaskName);
+            }
+            else
+            {
+                Console.WriteLine("Aborting task.");
+            }
+        }
+
         private void DeleteItem()
         {
+            Console.WriteLine("Delete Task");
+            Console.WriteLine("-----------");
+
             if (!_controller.HasItems)
             {
                 Console.WriteLine("You have no tasks!");
                 return;
             }
 
-            Console.Write("Number of task: ");
+            Console.Write("Enter task index: ");
             int index = int.Parse(Console.ReadLine()) - 1;
 
             TodoItem item = _controller.GetItemByIndex(index);

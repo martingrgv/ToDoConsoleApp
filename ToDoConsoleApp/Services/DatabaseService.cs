@@ -68,9 +68,19 @@ namespace ToDoConsoleApp.Services
             }
         }
 
-        public void Update(int id)
+        public int Update(int id, string taskName)
         {
-            throw new NotImplementedException();
+            SqlConnection connection = new SqlConnection(_conStr);
+            connection.Open();
+
+            using (connection)
+            {
+                SqlCommand command = new SqlCommand($"UPDATE TodoItems SET TaskName = @taskName WHERE Id = @id", connection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@taskName", taskName);
+
+                return command.ExecuteNonQuery();
+            }
         }
 
         public int Write(string task)
